@@ -54,14 +54,15 @@ const MySelect = ({ label, ...props }) => {
 const SignupForm = () => {
   return (
     <>
-      <h1>Subscribe!</h1>
+      <h1>Agile Ortho</h1>
+      <h3>Doctor Registration Form</h3>
       <Formik
         initialValues={{
           firstName: "",
           lastName: "",
           email: "",
           acceptedTerms: false, // added for our checkbox
-          jobType: "", // added for our select
+          speciality: "", // added for our select
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -76,12 +77,21 @@ const SignupForm = () => {
           acceptedTerms: Yup.boolean()
             .required("Required")
             .oneOf([true], "You must accept the terms and conditions."),
-          jobType: Yup.string()
+          speciality: Yup.string()
             .oneOf(
-              ["designer", "development", "product", "other"],
+              [
+                "shoulder",
+                "elbow",
+                "handandwrist",
+                "hipandthigh",
+                "footandankle",
+                ,
+                "other",
+              ],
               "Invalid Job Type"
             )
             .required("Required"),
+          url: Yup.string().url("Invalid URL."),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -109,19 +119,28 @@ const SignupForm = () => {
             type="email"
             placeholder="alok@agileortho.co.in"
           />
-          <MySelect label="Speciality" name="jobType">
+          <MyTextInput
+            label="Website"
+            name="url"
+            type="url"
+            placeholder="www.agileortho.in/"
+          />
+
+          <MySelect label="Speciality" name="speciality">
             <option value="">Select a speciality</option>
             <option value="shoulder">Shoulder</option>
             <option value="elbow">Elbow</option>
-            <option value="hand">Hand & Wrist</option>
-            <option value="hip">Hip & Thigh</option>
-            <option value="foot">Foot & Ankle</option>
-            <option value="hand">Knee & Lower Leg</option>
-            <option value="hand">Spine Surgeon</option>
-            <option value="hand">Pediatric Orthopedics</option>
-            <option value="hand">Orthopedic Oncologist</option>
-            <option value="hand">Complex Trauma Surgeon</option>
-            <option value="hand">Pelvic and Acetabular surgeon</option>
+            <option value="handandwrist">Hand and Wrist</option>
+            <option value="hipandthigh">Hip and Thigh</option>
+            <option value="footandankle">Foot and Ankle</option>
+            <option value="kneeandlowerleg">Knee and Lower Leg</option>
+            <option value="spinesurgeon">Spine Surgeon</option>
+            <option value="pediatricorthopedics">Pediatric Orthopedics</option>
+            <option value="orthopediconcologist">Orthopedic Oncologist</option>
+            <option value="complextraumasurgeon">Complex Trauma Surgeon</option>
+            <option value="pelvicandacetabularsurgeon">
+              Pelvic and Acetabular surgeon
+            </option>
             <option value="other">Other</option>
           </MySelect>
           <MyCheckbox name="acceptedTerms">
